@@ -1,0 +1,39 @@
+
+class ApiConstants {
+  static const sendOtp = 'registration';
+  static const verifyOtp = 'otpverification';
+  static const getProfile = 'profile';
+  static const getUserSessionCheckUserDetails = 'check-user-details';
+  static const email = 'user-email';
+  static const name = 'user-name';
+  static const gender = 'user-gender';
+  static const interested = 'user-interested';
+  static const sexuality = 'user-sexuality';
+  static const relationship = 'user-relationship';
+  static const passion = 'userpession';
+  static const dob = 'userdob';
+  static const fetchUserProfileData = 'show-profile';
+  static const faceVerification = 'face-verification';
+  static const userDatingType = 'user-dating-type';
+  static const aboutUs = 'user-about';
+  static const userLocation = 'user-location';
+  static const userDistance = 'user-distance';
+  static const editProfile = 'edit-profile';
+  static const fetchSubscriptionPlan = 'view-subscription';
+  static const buySubscription = 'buy-subscription';
+  static const fetchFeed = 'show-feed';
+  static const uploadFeed = 'create-feed';
+  static const fetchAbout = 'about';
+  static const fetchSafety = 'safety';
+  static const fetchHelpCenter = 'help-center';
+  static const fetchTermsCondition = 'term-condition';
+  static const fetchPrivacyPolicy = 'privacy-policy';
+  static const fetchShowUSerMatching = 'show-matchings';
+  static const fetchShowHitMeUpCategory = 'show-hitmeupcategory';
+  static const fetchMyHitMeUp = 'my-hitmeup';
+  static const deleteHitMeUp = 'delete-hitmeup';
+  static const hitMeUpRequests = 'hitmeup-requests';
+  static const hitMeUpRequestsAcceptOrReject = 'request-accept-reject';
+  static const fetchHitMeUpExplore = 'hitmeup-explore';
+    static const fetchHitMeUpUpcoming = 'show-hitmeup-coming';
+}
