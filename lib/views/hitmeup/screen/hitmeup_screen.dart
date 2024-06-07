@@ -1,4 +1,5 @@
 import 'package:datingapp/common/toast.dart';
+import 'package:datingapp/common/loader.dart';
 import 'package:datingapp/config/routes/route_name.dart';
 import 'package:datingapp/views/hitmeup/provider/hitmeup_provider.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
     _tabController = TabController(length: 2, vsync: this);
     SchedulerBinding.instance.addPostFrameCallback((_) {
       Provider.of<HitMeUpProvider>(context, listen: false).fetchHitMeUpCategoryNameListApi();
-      Provider.of<HitMeUpProvider>(context, listen: false).fetchHitMeUpExploreistApi();
+      Provider.of<HitMeUpProvider>(context, listen: false).fetchHitMeUpExploreListApi();
       Provider.of<HitMeUpProvider>(context, listen: false).fetchHitMeUpUpcomingListApi();
     });
   }
@@ -273,6 +274,10 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
                               ),
                               onSelected: (selected) {
                                 catName = category.categoryName;
+                                provider.saveHitMeCategoryData(
+                                    category.categoryName,
+                                    category.id
+                                );
                                 setState(() => value = category.id);
                               },
                             );
@@ -379,567 +384,575 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children:   [
+                    children: [
                       Consumer<HitMeUpProvider>(builder: (context, hitMeUpProvider, child) {
                         final data = hitMeUpProvider.fetchHitMeUpExploreListModel.data;
                         return data.isNotEmpty
                             ? ListView.builder(
-                            shrinkWrap: true,
-                            primary: true,
-                            // physics: const NeverScrollableScrollPhysics(),
-                            itemCount: hitMeUpProvider.fetchHitMeUpExploreListModel.data.length,
-                            itemBuilder: (context, index) {
-                              final hitMeUp = hitMeUpProvider.fetchHitMeUpExploreListModel.data[index];
-                              String inputDate = hitMeUp.date.toString();
-                              String inputDates = hitMeUp.createDate.toString();
-                              DateTime parsedDate = DateFormat("dd-MM-yyyy").parse(inputDate);
-                              String formattedDate = DateFormat("dd MMMM yyyy").format(parsedDate);
-                              DateTime parsedDates = DateFormat("dd/MM/yyyy").parse(inputDates);
-                              String formattedDates = DateFormat("dd MMMM yyyy").format(parsedDates);
-                              return SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey.shade200),
-                                        color: Colors.white24, borderRadius: BorderRadius.circular(10)),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-                                          child: InkWell(
-                                            onTap: ()async{
-                                              // await hitMeUpProvider.showUserDetailsDataProvider(context, hitMeUp.userId);
-                                              // materialPageRoute(context, ShowUserDetailsScreen(UserId:hitMeUp.userId));
-                                            },
-                                            child: Row(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(28.0),
-                                                  child: Image.network(
-                                                    imageBaseUrl + hitMeUpProvider.fetchHitMeUpExploreListModel.data[index].userImage,
-                                                    height: 50.0,
-                                                    width: 50.0,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                shrinkWrap: true,
+                                primary: true,
+                                // physics: const NeverScrollableScrollPhysics(),
+                                itemCount: hitMeUpProvider.fetchHitMeUpExploreListModel.data.length,
+                                itemBuilder: (context, index) {
+                                  final hitMeUp = hitMeUpProvider.fetchHitMeUpExploreListModel.data[index];
+                                  String inputDate = hitMeUp.date.toString();
+                                  String inputDates = hitMeUp.createDate.toString();
+                                  DateTime parsedDate = DateFormat("dd-MM-yyyy").parse(inputDate);
+                                  String formattedDate = DateFormat("dd MMMM yyyy").format(parsedDate);
+                                  DateTime parsedDates = DateFormat("dd/MM/yyyy").parse(inputDates);
+                                  String formattedDates = DateFormat("dd MMMM yyyy").format(parsedDates);
+                                  return SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade200), color: Colors.white24, borderRadius: BorderRadius.circular(10)),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  // await hitMeUpProvider.showUserDetailsDataProvider(context, hitMeUp.userId);
+                                                  // materialPageRoute(context, ShowUserDetailsScreen(UserId:hitMeUp.userId));
+                                                },
+                                                child: Row(
                                                   children: [
-                                                    Text(
-                                                      hitMeUpProvider.fetchHitMeUpExploreListModel.data[index].userName,
-                                                      style:  const TextStyle(color: Colors.white, fontSize: 18),
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(28.0),
+                                                      child: Image.network(
+                                                        imageBaseUrl + hitMeUpProvider.fetchHitMeUpExploreListModel.data[index].userImage,
+                                                        height: 50.0,
+                                                        width: 50.0,
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      formattedDates,
-                                                      style:  const TextStyle(color: Colors.white60, fontSize: 10),
+                                                    const SizedBox(
+                                                      width: 20,
                                                     ),
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          hitMeUpProvider.fetchHitMeUpExploreListModel.data[index].userName,
+                                                          style: const TextStyle(color: Colors.white, fontSize: 18),
+                                                        ),
+                                                        Text(
+                                                          formattedDates,
+                                                          style: const TextStyle(color: Colors.white60, fontSize: 10),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const Spacer(),
+                                                    const Image(image: AssetImage("assets/png_img/check1.png")),
                                                   ],
                                                 ),
-                                                const Spacer(),
-                                                const Image(image: AssetImage("assets/png_img/check1.png")),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
-                                          child: Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.calendar_month_outlined,
-                                                color: Colors.white,
-                                                size: 20,
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.calendar_month_outlined,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Text(
+                                                    formattedDate,
+                                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                                  ),
+                                                  const Spacer(),
+                                                  const Icon(
+                                                    Icons.watch_later_outlined,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Text(
+                                                    hitMeUp.time,
+                                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                                  ),
+                                                ],
                                               ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              Text(
-                                                formattedDate,
-                                                style:   const TextStyle(color: Colors.white, fontSize: 10),
-                                              ),
-                                              const Spacer(),
-                                              const Icon(
-                                                Icons.watch_later_outlined,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              Text(
-                                                hitMeUp.time,
-                                                style: const TextStyle(color: Colors.white, fontSize: 10),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Padding(
-                                            padding: const EdgeInsets.only(left: 15, bottom: 15, top: 10),
-                                            child: Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.location_on_outlined,
-                                                  color: Colors.white70,
-                                                  size: 30,
-                                                ),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                    child: Text(
+                                            ),
+                                            Padding(
+                                                padding: const EdgeInsets.only(left: 15, bottom: 15, top: 10),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.location_on_outlined,
+                                                      color: Colors.white70,
+                                                      size: 30,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                        child: Text(
                                                       hitMeUp.location,
                                                       style: const TextStyle(color: Colors.white),
                                                     ))
-                                              ],
-                                            )),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(bottom: 15.0),
-                                              child: Container(
-                                                  height: 40.0,
-                                                  width: width / 2 + 20,
-                                                  decoration: BoxDecoration(color: const Color.fromRGBO(233, 64, 87, 1), borderRadius: BorderRadius.circular(30)),
-                                                  child: Consumer<HitMeUpProvider>(
-                                                    builder: (context, provider, child) {
-                                                      return InkWell(
-                                                        onTap: () {
-                                                          // Provider.of<HitMeUpProvider>(context, listen: false).fetchShowMyHitMeUpProvider(context);
-                      
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (BuildContext context) {
-                                                              return AlertDialog(
-                                                                icon: Image.asset(
-                                                                  "assets/png_img/hitme_pic.png",
-                                                                  height: 80,
-                                                                  width: 80,
-                                                                ),
-                                                                title: Column(
-                                                                  children: [
-                                                                    const Text(
-                                                                      'Are you sure !',
-                                                                      textAlign: TextAlign.center,
-                                                                      style: TextStyle(
-                                                                        color: Color(0xFF0F1728),
-                                                                        fontSize: 22.66,
-                                                                        fontFamily: 'Outfit',
-                                                                        fontWeight: FontWeight.w700,
-                                                                      ),
+                                                  ],
+                                                )),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(bottom: 15.0),
+                                                  child: Container(
+                                                      height: 40.0,
+                                                      width: width / 2 + 20,
+                                                      decoration: BoxDecoration(color: const Color.fromRGBO(233, 64, 87, 1), borderRadius: BorderRadius.circular(30)),
+                                                      child: Consumer<HitMeUpProvider>(
+                                                        builder: (context, provider, child) {
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              // Provider.of<HitMeUpProvider>(context, listen: false).fetchShowMyHitMeUpProvider(context);
+
+                                                              showDialog(
+                                                                context: context,
+                                                                builder: (BuildContext context) {
+                                                                  return AlertDialog(
+                                                                    icon: Image.asset(
+                                                                      "assets/png_img/hitme_pic.png",
+                                                                      height: 80,
+                                                                      width: 80,
                                                                     ),
-                                                                    const Text(
-                                                                      'Do you want to hit me Up it ?',
-                                                                      textAlign: TextAlign.center,
-                                                                      style:  TextStyle(
-                                                                          fontSize: 14,
-                                                                          color: Color(0xFF475466),
-                                                                          fontWeight: FontWeight.w400,
-                                                                        ),  
-                                                                    ),
-                                                                    const SizedBox(
-                                                                      height: 10,
-                                                                    ),
-                                                                    Row(
+                                                                    title: Column(
                                                                       children: [
-                                                                        InkWell(
-                                                                          onTap: () {
-                                                                            Navigator.of(context).pop();
-                                                                          },
-                                                                          child: Container(
-                                                                            height: 40.0,
-                                                                            width: width / 2 - 70,
-                                                                            decoration: ShapeDecoration(
-                                                                              color: Colors.red.shade600,
-                                                                              shape: RoundedRectangleBorder(
-                                                                                side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
-                                                                                borderRadius: BorderRadius.circular(7.91),
-                                                                              ),
-                                                                              shadows: const [
-                                                                                BoxShadow(
-                                                                                  color: Color(0x0C101828),
-                                                                                  blurRadius: 1.98,
-                                                                                  offset: Offset(0, 0.99),
-                                                                                  spreadRadius: 0,
-                                                                                )
-                                                                              ],
-                                                                            ),
-                                                                            child: const Center(
-                                                                              child: Text(
-                                                                                'Cancel',
-                                                                                style: TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 15.82,
-                                                                                  fontFamily: 'Outfit',
-                                                                                  fontWeight: FontWeight.w600,
-                                                                                ),
-                                                                              ),
-                                                                            ),
+                                                                        const Text(
+                                                                          'Are you sure !',
+                                                                          textAlign: TextAlign.center,
+                                                                          style: TextStyle(
+                                                                            color: Color(0xFF0F1728),
+                                                                            fontSize: 22.66,
+                                                                            fontFamily: 'Outfit',
+                                                                            fontWeight: FontWeight.w700,
+                                                                          ),
+                                                                        ),
+                                                                        const Text(
+                                                                          'Do you want to hit me Up it ?',
+                                                                          textAlign: TextAlign.center,
+                                                                          style: TextStyle(
+                                                                            fontSize: 14,
+                                                                            color: Color(0xFF475466),
+                                                                            fontWeight: FontWeight.w400,
                                                                           ),
                                                                         ),
                                                                         const SizedBox(
-                                                                          width: 10,
+                                                                          height: 10,
                                                                         ),
-                                                                        InkWell(
-                                                                          onTap: () async {
-                                                                            //await provider.hitMeUpForExploreProvider(context, hitMeUp.userId);
-                                                                            // Navigator.of(context).pop();
-                                                                          },
-                                                                          child: Container(
-                                                                            height: 40.0,
-                                                                            width: width / 2 - 70,
-                                                                            decoration: ShapeDecoration(
-                                                                              color: Colors.green.shade600,
-                                                                              shape: RoundedRectangleBorder(
-                                                                                side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
-                                                                                borderRadius: BorderRadius.circular(7.91),
-                                                                              ),
-                                                                              shadows: const [
-                                                                                BoxShadow(
-                                                                                  color: Color(0x0C101828),
-                                                                                  blurRadius: 1.98,
-                                                                                  offset: Offset(0, 0.99),
-                                                                                  spreadRadius: 0,
-                                                                                )
-                                                                              ],
-                                                                            ),
-                                                                            child: const Center(
-                                                                              child: Text(
-                                                                                'Ok',
-                                                                                style: TextStyle(
-                                                                                  color: Colors.white,
-                                                                                  fontSize: 15.82,
-                                                                                  fontFamily: 'Outfit',
-                                                                                  fontWeight: FontWeight.w600,
+                                                                        Row(
+                                                                          children: [
+                                                                            InkWell(
+                                                                              onTap: () {
+                                                                                Navigator.of(context).pop();
+                                                                              },
+                                                                              child: Container(
+                                                                                height: 40.0,
+                                                                                width: width / 2 - 70,
+                                                                                decoration: ShapeDecoration(
+                                                                                  color: Colors.red.shade600,
+                                                                                  shape: RoundedRectangleBorder(
+                                                                                    side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
+                                                                                    borderRadius: BorderRadius.circular(7.91),
+                                                                                  ),
+                                                                                  shadows: const [
+                                                                                    BoxShadow(
+                                                                                      color: Color(0x0C101828),
+                                                                                      blurRadius: 1.98,
+                                                                                      offset: Offset(0, 0.99),
+                                                                                      spreadRadius: 0,
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                                child: const Center(
+                                                                                  child: Text(
+                                                                                    'Cancel',
+                                                                                    style: TextStyle(
+                                                                                      color: Colors.white,
+                                                                                      fontSize: 15.82,
+                                                                                      fontFamily: 'Outfit',
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
                                                                                 ),
                                                                               ),
                                                                             ),
-                                                                          ),
+                                                                            const SizedBox(
+                                                                              width: 10,
+                                                                            ),
+                                                                            InkWell(
+                                                                              onTap: () async {
+                                                                                final response = await hitMeUpProvider.sendRequestHitMeUpApi(hitMeUp.userId);
+                                                                                if(response["status"]==true){
+                                                                                  CommonToast.toastSuccessMessage(response["message"]);
+                                                                                  hitMeUpProvider.fetchHitMeUpExploreListApi();
+                                                                                  Navigator.of(context).pop();
+                                                                                }else{
+                                                                                  CommonToast.toastSuccessMessage(response["message"]);
+                                                                                  Navigator.of(context).pop();
+                                                                                }
+                                                                                //await provider.hitMeUpForExploreProvider(context, hitMeUp.userId);
+                                                                                // Navigator.of(context).pop();
+                                                                              },
+                                                                              child: Container(
+                                                                                height: 40.0,
+                                                                                width: width / 2 - 70,
+                                                                                decoration: ShapeDecoration(
+                                                                                  color: Colors.green.shade600,
+                                                                                  shape: RoundedRectangleBorder(
+                                                                                    side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
+                                                                                    borderRadius: BorderRadius.circular(7.91),
+                                                                                  ),
+                                                                                  shadows: const [
+                                                                                    BoxShadow(
+                                                                                      color: Color(0x0C101828),
+                                                                                      blurRadius: 1.98,
+                                                                                      offset: Offset(0, 0.99),
+                                                                                      spreadRadius: 0,
+                                                                                    )
+                                                                                  ],
+                                                                                ),
+                                                                                child:   Center(
+                                                                                  child: hitMeUpProvider.sendRequestExploreHitMeUpLoading ? CommonLoader.animLoader() : Text(
+                                                                                    'Ok',
+                                                                                    style: TextStyle(
+                                                                                      color: Colors.white,
+                                                                                      fontSize: 15.82,
+                                                                                      fontFamily: 'Outfit',
+                                                                                      fontWeight: FontWeight.w600,
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                  ],
-                                                                ),
+                                                                  );
+                                                                },
                                                               );
                                                             },
+                                                            child: Center(
+                                                              child: Text(
+                                                                'HIT ME UP for ${hitMeUp.categoryName}',
+                                                                style: const TextStyle(fontSize: 14, color: Colors.white),
+                                                              ),
+                                                            ),
                                                           );
                                                         },
-                                                        child: Center(
-                                                          child: Text(
-                                                            'HIT ME UP for ${hitMeUp.categoryName}',
-                                                            style:const TextStyle(fontSize: 14, color: Colors.white),
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  )),
+                                                      )),
+                                                ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                  );
+                                })
+                            : const Center(
+                                child: Text(
+                                  "No data found",
+                                  style: TextStyle(fontSize: 14, color: Colors.white),
                                 ),
                               );
-                            })
-                            : const Center(
-                          child: Text(
-                            "No data found",
-                            style: TextStyle(fontSize: 14, color: Colors.white),
-                          ),
-                        );
                       }),
-
-                       Consumer<HitMeUpProvider>(builder: (context, hitMeUpProvider, child) {
-                    final data = hitMeUpProvider.fetchHitMeUpUpcomingListModel.data;
-                    return data.isNotEmpty
-                        ? ListView.builder(
-                            shrinkWrap: true,
-                            primary: true,
-                            // physics: const NeverScrollableScrollPhysics(),
-                            itemCount: hitMeUpProvider.fetchHitMeUpUpcomingListModel.data.length,
-                            itemBuilder: (context, index) {
-                              // print("+++++line 275 :: ${hitMeUpProvider.fetchHitMeUpUpComingDataModel.data.length}");
-                              return SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
-                                  child: Container(
-                                    width: MediaQuery.of(context).size.width,
-                                    decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.grey.shade200),
-                                        color: Colors.white24, borderRadius: BorderRadius.circular(10)),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
-                                          child: InkWell(
-                                            onTap: ()async{
-                                              // await hitMeUpProvider.showUserDetailsDataProvider(context, hitMeUpProvider.fetchHitMeUpUpComingDataModel.data[index].userId);
-                                              // materialPageRoute(context, ShowUserDetailsScreen(UserId:hitMeUpProvider.fetchHitMeUpUpComingDataModel.data[index].userId));
-                                            },
-                                            child: Row(
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius: BorderRadius.circular(28.0),
-                                                  child: Image.network(
-                                                    imageBaseUrl + hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].profilePic,
-                                                    height: 50.0,
-                                                    width: 50.0,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                      Consumer<HitMeUpProvider>(builder: (context, hitMeUpProvider, child) {
+                        final data = hitMeUpProvider.fetchHitMeUpUpcomingListModel.data;
+                        return data.isNotEmpty
+                            ? ListView.builder(
+                                shrinkWrap: true,
+                                primary: true,
+                                // physics: const NeverScrollableScrollPhysics(),
+                                itemCount: hitMeUpProvider.fetchHitMeUpUpcomingListModel.data.length,
+                                itemBuilder: (context, index) {
+                                  // print("+++++line 275 :: ${hitMeUpProvider.fetchHitMeUpUpComingDataModel.data.length}");
+                                  return SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 20, top: 10, right: 20),
+                                      child: Container(
+                                        width: MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(border: Border.all(color: Colors.grey.shade200), color: Colors.white24, borderRadius: BorderRadius.circular(10)),
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(top: 5, left: 20, right: 20),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  // await hitMeUpProvider.showUserDetailsDataProvider(context, hitMeUpProvider.fetchHitMeUpUpComingDataModel.data[index].userId);
+                                                  // materialPageRoute(context, ShowUserDetailsScreen(UserId:hitMeUpProvider.fetchHitMeUpUpComingDataModel.data[index].userId));
+                                                },
+                                                child: Row(
                                                   children: [
-                                                    Text(
-                                                      hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].name,
-                                                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                                                    ClipRRect(
+                                                      borderRadius: BorderRadius.circular(28.0),
+                                                      child: Image.network(
+                                                        imageBaseUrl + hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].profilePic,
+                                                        height: 50.0,
+                                                        width: 50.0,
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].createDate,
-                                                      style:  const TextStyle(color: Colors.white60, fontSize: 10),
+                                                    const SizedBox(
+                                                      width: 20,
                                                     ),
+                                                    Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].name,
+                                                          style: const TextStyle(color: Colors.white, fontSize: 18),
+                                                        ),
+                                                        Text(
+                                                          hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].createDate,
+                                                          style: const TextStyle(color: Colors.white60, fontSize: 10),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                    const Spacer(),
+                                                    const Image(image: AssetImage("assets/png_img/check1.png")),
                                                   ],
                                                 ),
-                                                const Spacer(),
-                                                const Image(image: AssetImage("assets/png_img/check1.png")),
-                                              ],
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        Padding(
-                                            padding: const EdgeInsets.only(left: 15, bottom: 15, top: 10),
-                                            child: Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.radio_button_checked,
-                                                  color: Colors.white70,
-                                                  size: 30,
-                                                ),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                    child: Text(
+                                            Padding(
+                                                padding: const EdgeInsets.only(left: 15, bottom: 15, top: 10),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.radio_button_checked,
+                                                      color: Colors.white70,
+                                                      size: 30,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                        child: Text(
                                                       hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].title,
                                                       style: const TextStyle(color: Colors.white),
                                                     ))
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(left: 15, bottom: 15),
-                                            child: Row(
-                                              children: [
-                                                const Icon(
-                                                  Icons.location_on_outlined,
-                                                  color: Colors.white70,
-                                                  size: 30,
-                                                ),
-                                                const SizedBox(
-                                                  width: 5,
-                                                ),
-                                                Expanded(
-                                                    child: Text(
-                                                      maxLines: 3,
-                                                  hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].location,
-                                                  style: const TextStyle(color: Colors.white),
-                                                ))
-                                              ],
-                                            )),
-                                        Padding(
-                                          padding: const EdgeInsets.only(left: 20, right: 20),
-                                          child: Row(
-                                            children: [
-                                              const Icon(
-                                                Icons.calendar_month_outlined,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              Text(
-                                                hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].date,
-                                                style:  const TextStyle(color: Colors.white, fontSize: 10),
-                                              ),
-                                              const Spacer(),
-                                              const Icon(
-                                                Icons.watch_later_outlined,
-                                                color: Colors.white,
-                                                size: 20,
-                                              ),
-                                              const SizedBox(
-                                                width: 15,
-                                              ),
-                                              Text(
-                                                hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].time,
-                                                style:  const TextStyle(color: Colors.white, fontSize: 10),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(height: 10,),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
+                                                  ],
+                                                )),
                                             Padding(
-                                              padding: const EdgeInsets.only(bottom: 15.0),
-                                              child: Container(
-                                                height: 40.0,
-                                                width: width / 2 + 20,
-                                                decoration: BoxDecoration(color: const Color.fromRGBO(233, 64, 87, 1), borderRadius: BorderRadius.circular(30)),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    await showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext context) {
-                                                        return AlertDialog(
-                                                          icon: Image.asset(
-                                                            "assets/png_img/trash.png",
-                                                            height: 80,
-                                                            width: 80,
-                                                          ),
-                                                          title: Column(
-                                                            children: [
-                                                              const Text(
-                                                                'Delete',
-                                                                textAlign: TextAlign.center,
-                                                                style: TextStyle(
-                                                                  color: Color(0xFF0F1728),
-                                                                  fontSize: 22.66,
-                                                                  fontFamily: 'Outfit',
-                                                                  fontWeight: FontWeight.w700,
-                                                                ),
+                                                padding: const EdgeInsets.only(left: 15, bottom: 15),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.location_on_outlined,
+                                                      color: Colors.white70,
+                                                      size: 30,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    Expanded(
+                                                        child: Text(
+                                                      maxLines: 3,
+                                                      hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].location,
+                                                      style: const TextStyle(color: Colors.white),
+                                                    ))
+                                                  ],
+                                                )),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 20, right: 20),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.calendar_month_outlined,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Text(
+                                                    hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].date,
+                                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                                  ),
+                                                  const Spacer(),
+                                                  const Icon(
+                                                    Icons.watch_later_outlined,
+                                                    color: Colors.white,
+                                                    size: 20,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 15,
+                                                  ),
+                                                  Text(
+                                                    hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].time,
+                                                    style: const TextStyle(color: Colors.white, fontSize: 10),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 10,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(bottom: 15.0),
+                                                  child: Container(
+                                                    height: 40.0,
+                                                    width: width / 2 + 20,
+                                                    decoration: BoxDecoration(color: const Color.fromRGBO(233, 64, 87, 1), borderRadius: BorderRadius.circular(30)),
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext context) {
+                                                            return AlertDialog(
+                                                              icon: Image.asset(
+                                                                "assets/png_img/trash.png",
+                                                                height: 80,
+                                                                width: 80,
                                                               ),
-                                                              const Text(
-                                                                'Are you sure !',
-                                                                textAlign: TextAlign.center,
-                                                                style: TextStyle(
-                                                                  color: Color(0xFF475466),
-                                                                  fontSize: 11.84,
-                                                                  fontFamily: 'Outfit',
-                                                                  fontWeight: FontWeight.w400,
-                                                                ),
-                                                              ),
-                                                              const SizedBox(
-                                                                height: 10,
-                                                              ),
-                                                              Row(
+                                                              title: Column(
                                                                 children: [
-                                                                  InkWell(
-                                                                    onTap: () {
-                                                                      Navigator.of(context).pop();
-                                                                    },
-                                                                    child: Container(
-                                                                      height: 40.0,
-                                                                      width: width / 2 - 70,
-                                                                      decoration: ShapeDecoration(
-                                                                        color: Colors.white,
-                                                                        shape: RoundedRectangleBorder(
-                                                                          side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
-                                                                          borderRadius: BorderRadius.circular(7.91),
-                                                                        ),
-                                                                        shadows: const [
-                                                                          BoxShadow(
-                                                                            color: Color(0x0C101828),
-                                                                            blurRadius: 1.98,
-                                                                            offset: Offset(0, 0.99),
-                                                                            spreadRadius: 0,
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                      child: const Center(
-                                                                        child: Text(
-                                                                          'No',
-                                                                          style: TextStyle(
-                                                                            color: Color(0xFF344053),
-                                                                            fontSize: 15.82,
-                                                                            fontFamily: 'Outfit',
-                                                                            fontWeight: FontWeight.w600,
-                                                                          ),
-                                                                        ),
-                                                                      ),
+                                                                  const Text(
+                                                                    'Delete',
+                                                                    textAlign: TextAlign.center,
+                                                                    style: TextStyle(
+                                                                      color: Color(0xFF0F1728),
+                                                                      fontSize: 22.66,
+                                                                      fontFamily: 'Outfit',
+                                                                      fontWeight: FontWeight.w700,
+                                                                    ),
+                                                                  ),
+                                                                  const Text(
+                                                                    'Are you sure !',
+                                                                    textAlign: TextAlign.center,
+                                                                    style: TextStyle(
+                                                                      color: Color(0xFF475466),
+                                                                      fontSize: 11.84,
+                                                                      fontFamily: 'Outfit',
+                                                                      fontWeight: FontWeight.w400,
                                                                     ),
                                                                   ),
                                                                   const SizedBox(
-                                                                    width: 10,
+                                                                    height: 10,
                                                                   ),
-                                                                  InkWell(
-                                                                    onTap: () async {
-                                                                      // await hitMeUpProvider.hitMeUpDeleteUpcomingProvider(context, hitMeUpProvider.fetchHitMeUpUpComingDataModel.data[index].userId);
-                                                                      //
-                                                                    },
-                                                                    child: Container(
-                                                                      height: 40.0,
-                                                                      width: width / 2 - 70,
-                                                                      decoration: ShapeDecoration(
-                                                                        color: Colors.red.shade600,
-                                                                        shape: RoundedRectangleBorder(
-                                                                          side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
-                                                                          borderRadius: BorderRadius.circular(7.91),
-                                                                        ),
-                                                                        shadows: const [
-                                                                          BoxShadow(
-                                                                            color: Color(0x0C101828),
-                                                                            blurRadius: 1.98,
-                                                                            offset: Offset(0, 0.99),
-                                                                            spreadRadius: 0,
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                      child: const Center(
-                                                                        child: Text(
-                                                                          'Yes',
-                                                                          style: TextStyle(
+                                                                  Row(
+                                                                    children: [
+                                                                      InkWell(
+                                                                        onTap: () {
+                                                                          Navigator.of(context).pop();
+                                                                        },
+                                                                        child: Container(
+                                                                          height: 40.0,
+                                                                          width: width / 2 - 70,
+                                                                          decoration: ShapeDecoration(
                                                                             color: Colors.white,
-                                                                            fontSize: 15.82,
-                                                                            fontFamily: 'Outfit',
-                                                                            fontWeight: FontWeight.w600,
+                                                                            shape: RoundedRectangleBorder(
+                                                                              side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
+                                                                              borderRadius: BorderRadius.circular(7.91),
+                                                                            ),
+                                                                            shadows: const [
+                                                                              BoxShadow(
+                                                                                color: Color(0x0C101828),
+                                                                                blurRadius: 1.98,
+                                                                                offset: Offset(0, 0.99),
+                                                                                spreadRadius: 0,
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                          child: const Center(
+                                                                            child: Text(
+                                                                              'No',
+                                                                              style: TextStyle(
+                                                                                color: Color(0xFF344053),
+                                                                                fontSize: 15.82,
+                                                                                fontFamily: 'Outfit',
+                                                                                fontWeight: FontWeight.w600,
+                                                                              ),
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    ),
+                                                                      const SizedBox(
+                                                                        width: 10,
+                                                                      ),
+                                                                      InkWell(
+                                                                        onTap: () async {
+                                                                         final response = await hitMeUpProvider.hitMeUpUpcomingDeleteApi(hitMeUpProvider.fetchHitMeUpUpcomingListModel.data[index].userId);
+                                                                           if(response["status"]==true){
+                                                                             CommonToast.toastSuccessMessage(response["message"]);
+                                                                             hitMeUpProvider.fetchHitMeUpUpcomingListApi();
+                                                                             Navigator.of(context).pop();
+                                                                           }
+                                                                        },
+                                                                        child: Container(
+                                                                          height: 40.0,
+                                                                          width: width / 2 - 70,
+                                                                          decoration: ShapeDecoration(
+                                                                            color: Colors.red.shade600,
+                                                                            shape: RoundedRectangleBorder(
+                                                                              side: const BorderSide(width: 0.99, color: Color(0xFFCFD4DC)),
+                                                                              borderRadius: BorderRadius.circular(7.91),
+                                                                            ),
+                                                                            shadows: const [
+                                                                              BoxShadow(
+                                                                                color: Color(0x0C101828),
+                                                                                blurRadius: 1.98,
+                                                                                offset: Offset(0, 0.99),
+                                                                                spreadRadius: 0,
+                                                                              )
+                                                                            ],
+                                                                          ),
+                                                                          child: const Center(
+                                                                            child: Text(
+                                                                              'Yes',
+                                                                              style: TextStyle(
+                                                                                color: Colors.white,
+                                                                                fontSize: 15.82,
+                                                                                fontFamily: 'Outfit',
+                                                                                fontWeight: FontWeight.w600,
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ),
+                                                                    ],
                                                                   ),
                                                                 ],
                                                               ),
-                                                            ],
-                                                          ),
+                                                            );
+                                                          },
                                                         );
                                                       },
-                                                    );
-                                                  },
-                                                  child: const Center(
-                                                    child: Text(
-                                                      'Delete',
-                                                      style:TextStyle(fontSize: 14, color: Colors.white),
+                                                      child: const Center(
+                                                        child: Text(
+                                                          'Delete',
+                                                          style: TextStyle(fontSize: 14, color: Colors.white),
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
+                                              ],
                                             ),
                                           ],
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
+                                  );
+                                })
+                            : const Center(
+                                child: Text(
+                                  "No data found",
+                                  style: TextStyle(fontSize: 14, color: Colors.white),
                                 ),
                               );
-                            })
-                        : const Center(
-                            child: Text(
-                              "No data found",
-                              style: TextStyle(fontSize: 14, color: Colors.white),
-                            ),
-                          );
-                  }),
-             
-                     
+                      }),
                     ],
                   ),
                 )

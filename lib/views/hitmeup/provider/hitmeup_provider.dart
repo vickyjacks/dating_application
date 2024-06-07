@@ -185,7 +185,7 @@ class HitMeUpProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  Future fetchHitMeUpExploreistApi()async{
+  Future fetchHitMeUpExploreListApi()async{
     _fetchHitMeUpExploreLoading = true;
     notifyListeners();
     try{
@@ -237,5 +237,73 @@ class HitMeUpProvider with ChangeNotifier{
     }
   }
 
+  /// hit me up upcoming delete api
+  bool _hitMeUpUpcomingDeleteLoading= false;
+  bool get hitMeUpUpcomingDeleteLoading => _hitMeUpUpcomingDeleteLoading;
+  set hitMeUpUpcomingDeleteLoading(bool value) {
+    _hitMeUpUpcomingDeleteLoading = value;
+    notifyListeners();
+  }
+
+  Future hitMeUpUpcomingDeleteApi(String receiverId) async {
+    _hitMeUpUpcomingDeleteLoading = true;
+    notifyListeners();
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? userId = pref.getString('userId');
+      final data = {
+        "sender_id": userId,
+        "receiver_id": receiverId
+      };
+      final response = await apiObj.postData(ApiConstants.deleteHitMeUpUpcoming, data);
+      _hitMeUpUpcomingDeleteLoading = false;
+      notifyListeners();
+      return response;
+    } on Exception catch (e) {
+      _hitMeUpUpcomingDeleteLoading = false;
+      notifyListeners();
+      throw Exception(e.toString());
+    }
+  }
+
+  /// hit me up send request explore api
+  bool _sendRequestExploreHitMeUpLoading= false;
+  bool get sendRequestExploreHitMeUpLoading => _sendRequestExploreHitMeUpLoading;
+  set sendRequestExploreHitMeUpLoading(bool value) {
+    _sendRequestExploreHitMeUpLoading = value;
+    notifyListeners();
+  }
+
+  Future sendRequestHitMeUpApi(String receiverId) async {
+    _hitMeUpUpcomingDeleteLoading = true;
+    notifyListeners();
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? userId = pref.getString('userId');
+      final data = {"sender_id": userId,
+        "receiver_id": receiverId
+      };
+      final response = await apiObj.postData(ApiConstants.sendExploreRequestHitMeUp, data);
+      _hitMeUpUpcomingDeleteLoading = false;
+      notifyListeners();
+      return response;
+    } on Exception catch (e) {
+      _hitMeUpUpcomingDeleteLoading = false;
+      notifyListeners();
+      throw Exception(e.toString());
+    }
+  }
+
+  /// store hit me up category name category id
+  String hitMeUpCategoryName = '';
+  int hitMeUpCategoryId = 0;
+  void saveHitMeCategoryData(String categoryName,int categoryId) {
+    hitMeUpCategoryName = categoryName;
+    hitMeUpCategoryId = categoryId;
+    notifyListeners(); 
+  }
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController detailsController = TextEditingController();
 
 }
