@@ -43,7 +43,7 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Consumer<HitMeUpProvider>(builder: (context, provider, child) {
       if (provider.fetchHitMeUpCategoryNameLoading) {
@@ -304,7 +304,7 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
                                 if (value <= 0) {
                                   CommonToast.toastErrorMessage("Please select category");
                                 } else {
-                                  // materialPageRoute(context, CreateHitMeUpScreen());
+                                Navigator.of(context).pushNamed(RoutesName.createHitMeUpScreen);
                                 }
                               },
                               child: const Center(
@@ -593,10 +593,10 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
                                                                                 if(response["status"]==true){
                                                                                   CommonToast.toastSuccessMessage(response["message"]);
                                                                                   hitMeUpProvider.fetchHitMeUpExploreListApi();
-                                                                                  Navigator.of(context).pop();
+                                                                                   if(context.mounted)Navigator.of(context).pop();
                                                                                 }else{
                                                                                   CommonToast.toastSuccessMessage(response["message"]);
-                                                                                  Navigator.of(context).pop();
+                                                                                   if(context.mounted)Navigator.of(context).pop();
                                                                                 }
                                                                                 //await provider.hitMeUpForExploreProvider(context, hitMeUp.userId);
                                                                                 // Navigator.of(context).pop();
@@ -620,7 +620,7 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
                                                                                   ],
                                                                                 ),
                                                                                 child:   Center(
-                                                                                  child: hitMeUpProvider.sendRequestExploreHitMeUpLoading ? CommonLoader.animLoader() : Text(
+                                                                                  child: hitMeUpProvider.sendRequestExploreHitMeUpLoading ? CommonLoader.animLoader() : const Text(
                                                                                     'Ok',
                                                                                     style: TextStyle(
                                                                                       color: Colors.white,
@@ -887,7 +887,7 @@ class _HitMeUpScreenState extends State<HitMeUpScreen> with SingleTickerProvider
                                                                            if(response["status"]==true){
                                                                              CommonToast.toastSuccessMessage(response["message"]);
                                                                              hitMeUpProvider.fetchHitMeUpUpcomingListApi();
-                                                                             Navigator.of(context).pop();
+                                                                              if(context.mounted)Navigator.of(context).pop();
                                                                            }
                                                                         },
                                                                         child: Container(

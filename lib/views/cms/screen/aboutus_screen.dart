@@ -22,7 +22,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Consumer<CMSProvider>(builder: (context,provider,child){
       return  provider.aboutUSLoading ?   Scaffold(
@@ -52,7 +52,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                     width: width,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -103,8 +103,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 0),
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 0),
                   child: Text(
                     "About",
                     style:   TextStyle(
@@ -135,7 +135,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                         children: [
                           Text(
                               provider.fetchAboutUsModel.data[index].title,
-                              style:   TextStyle(
+                              style:   const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                   fontWeight: FontWeight.w400,

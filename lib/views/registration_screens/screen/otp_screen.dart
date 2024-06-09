@@ -1,4 +1,3 @@
-import 'package:datingapp/common/button.dart';
 import 'package:datingapp/views/registration_screens/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +49,7 @@ class OTPScreenState extends State<OTPScreen> {
                     )),
               ),
                 Padding(
-                padding: EdgeInsets.only(top: 20.0, bottom: 25),
+                padding: const EdgeInsets.only(top: 20.0, bottom: 25),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

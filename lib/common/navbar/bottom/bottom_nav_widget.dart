@@ -7,7 +7,7 @@ class BottomWidget extends StatelessWidget {
   final String img;
   final String img2;
 
-  BottomWidget({this.onTap, required this.img,required this.img2});
+  const BottomWidget({super.key, this.onTap, required this.img,required this.img2});
 
   @override
   Widget build(BuildContext context) {

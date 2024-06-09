@@ -2,6 +2,7 @@ import 'package:datingapp/views/cms/provider/cms_provider.dart';
 import 'package:datingapp/views/feed/provider/feed_provider.dart';
 import 'package:datingapp/views/hitmeup/provider/hitmeup_provider.dart';
 import 'package:datingapp/views/home/provider/home_provider.dart';
+import 'package:datingapp/views/location/provider/location_provider.dart';
 import 'package:datingapp/views/matchings/provider/matching_provider.dart';
 import 'package:datingapp/views/profiles/provider/profile_provider.dart';
 import 'package:datingapp/views/registration_screens/provider/auth_provider.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => CMSProvider()),
         ChangeNotifierProvider(create: (context) => MatchingProvider()),
         ChangeNotifierProvider(create: (context) => HitMeUpProvider()),
+                ChangeNotifierProvider(create: (context) => LocationProvider()),
       ],
       child: MaterialApp(
         theme: ThemeData(

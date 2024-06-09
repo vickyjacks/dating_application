@@ -15,7 +15,6 @@ class GetLocationScreen extends StatefulWidget {
 }
 
 class GetLocationScreenState extends State<GetLocationScreen> {
-  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -42,11 +41,11 @@ class GetLocationScreenState extends State<GetLocationScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 0, top: 30),
+                  padding: EdgeInsets.only(left: 0, top: 30),
                   child: Text(
                     "Get Location",
                     style: TextStyle(
@@ -56,11 +55,11 @@ class GetLocationScreenState extends State<GetLocationScreen> {
                         fontWeight: FontWeight.w400)
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 30, top: 0, right: 30),
+                  padding: EdgeInsets.only(left: 30, top: 0, right: 30),
                   child: Text(
                     "You'll need to enable your location in order to use this app .",
                     textAlign: TextAlign.center,
@@ -71,7 +70,7 @@ class GetLocationScreenState extends State<GetLocationScreen> {
                         fontWeight: FontWeight.w400)
                   ),
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 20,
                 ),
 
@@ -173,7 +172,6 @@ class GetLocationScreenState extends State<GetLocationScreen> {
                       borderRadius: BorderRadius.circular(30),
                       onTap: () async {
                         setState(() {
-                          _isLoading = true;
                         });
                         await provider.requestLocationPermission().then((granted) {
                           if (granted) {
@@ -187,7 +185,7 @@ class GetLocationScreenState extends State<GetLocationScreen> {
                                         position.latitude, position.longitude);
                                     var response = await provider.postUserLatLngPostApi();
                                     if(response["status"]==true){
-                                        Navigator.pushReplacementNamed(context, RoutesName.distanceRangeScreen);
+                                        if(context.mounted) Navigator.pushReplacementNamed(context, RoutesName.distanceRangeScreen);
                                     }else{
                                       CommonToast.toastErrorMessage(response["message"]);
                                     }
@@ -204,7 +202,6 @@ class GetLocationScreenState extends State<GetLocationScreen> {
                           }
                         }).whenComplete(() {
                           setState(() {
-                            _isLoading = false;
                           });
                         });
                       },

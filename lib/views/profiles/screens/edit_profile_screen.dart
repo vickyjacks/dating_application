@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../common/loader.dart';
 import '../../../common/toast.dart';
 
+// ignore: must_be_immutable
 class EditProfilePage extends StatefulWidget {
    int ? relationShip;
    EditProfilePage({super.key, this.relationShip});
@@ -324,7 +325,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       onTap: ()async{
                          final response = await provider.updateProfileApi(relationships);
                         if(response["status"]==true){
-                          Navigator.of(context).pop();
+                          if(context.mounted) Navigator.of(context).pop();
                           // if(context.mounted) Navigator.pushReplacementNamed(context, RoutesName.interestedInScreen);
                         }else{
                           CommonToast.toastErrorMessage(response["message"]);

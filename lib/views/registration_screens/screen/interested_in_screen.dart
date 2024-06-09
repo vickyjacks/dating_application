@@ -33,7 +33,7 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
       interested="bisexual";
     }
     final height = MediaQuery.of(context).size.height;
-    final width= MediaQuery.of(context).size.width;
+    // final width= MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -82,9 +82,9 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 20),
+              padding: EdgeInsets.only(left: 15, top: 20),
               child: Text(
                 "I am interested in",
                 style:  TextStyle(color: Colors.white,
@@ -118,12 +118,12 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Man",
                                 style: TextStyle(
@@ -161,14 +161,14 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Woman",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -204,12 +204,12 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Gay",
                                 style: TextStyle(
@@ -251,12 +251,12 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Lesbian",
                                 style: TextStyle(
@@ -297,12 +297,12 @@ class _InterestedInScreenState extends State<InterestedInScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Bisexual",
                                 style: TextStyle(

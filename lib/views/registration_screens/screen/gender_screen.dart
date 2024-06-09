@@ -26,7 +26,7 @@ class GenderScreenState extends State<GenderScreen> {
       gender = "non-binary";
     }
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -40,9 +40,9 @@ class GenderScreenState extends State<GenderScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 20),
+              padding: EdgeInsets.only(left: 15, top: 20),
               child: Text(
                 "I am a",
                 style:TextStyle(
@@ -75,11 +75,11 @@ class GenderScreenState extends State<GenderScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Man",
                                 style:TextStyle(
@@ -113,13 +113,13 @@ class GenderScreenState extends State<GenderScreen> {
                             color: _value == 1 ? Colors.red : Colors.white),
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      label: SizedBox(
+                      label: const SizedBox(
                         height: 35,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text("Woman",
                                   style: TextStyle(
                                     color: Colors.white,
@@ -154,11 +154,11 @@ class GenderScreenState extends State<GenderScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Non-Binary",
                                 style: TextStyle(

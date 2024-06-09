@@ -1,15 +1,12 @@
-import 'dart:io';
-import 'package:datingapp/views/profiles/provider/profile_provider.dart';
+import 'dart:io'; 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import '../../../common/loader.dart';
 import '../../../common/toast.dart';
-import '../../../config/routes/route_name.dart';
-import '../../profiles/model/fetch_user_details_model.dart';
+import '../../../config/routes/route_name.dart'; 
 import '../provider/auth_provider.dart';
 
 class FaceDetectionScreen extends StatefulWidget {
@@ -48,7 +45,7 @@ class _FaceDetectionScreenState extends State<FaceDetectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: Colors.black,
@@ -69,8 +66,8 @@ class _FaceDetectionScreenState extends State<FaceDetectionScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 0),
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 0),
                   child: Align(
                     alignment: Alignment.bottomLeft,
                     child: Text(

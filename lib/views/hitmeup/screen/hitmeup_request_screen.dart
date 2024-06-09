@@ -2,8 +2,7 @@ import 'package:datingapp/common/toast.dart';
 import 'package:datingapp/views/hitmeup/provider/hitmeup_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart';
+import 'package:flutter/services.dart'; 
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -26,7 +25,7 @@ class _HitMeUpRequestScreenState extends State<HitMeUpRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    // final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     String imageBaseUrl = "https://dostanaa.in/public/upload/";
     return Consumer<HitMeUpProvider>(builder: (context, provider, child) {
@@ -340,7 +339,7 @@ class _HitMeUpRequestScreenState extends State<HitMeUpRequestScreen> {
                                                 if (response["true"] == true) {
                                                   CommonToast.toastErrorMessage(
                                                       response["message"]);
-                                                  Navigator.of(context).pop();
+                                                   if(context.mounted) Navigator.of(context).pop();
                                                 } else {
                                                   CommonToast.toastErrorMessage(
                                                       response["message"]);

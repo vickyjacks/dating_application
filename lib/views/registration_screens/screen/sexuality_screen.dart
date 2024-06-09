@@ -31,7 +31,7 @@ class SexualityScreenState extends State<SexualityScreen> {
       sexuality = "bisexual";
     }
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -80,9 +80,9 @@ class SexualityScreenState extends State<SexualityScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 30),
+              padding: EdgeInsets.only(left: 15, top: 30),
               child: Text(
                 "Sexuality",
                 style:TextStyle(
@@ -114,11 +114,11 @@ class SexualityScreenState extends State<SexualityScreen> {
                     label: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 35,
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
                               "Straight",
                               style: TextStyle(
@@ -151,11 +151,11 @@ class SexualityScreenState extends State<SexualityScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width - 66,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Gay",
                                 style: TextStyle(
@@ -189,14 +189,14 @@ class SexualityScreenState extends State<SexualityScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Lesbian",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -227,11 +227,11 @@ class SexualityScreenState extends State<SexualityScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Bisexual",
                                 style: TextStyle(
@@ -265,14 +265,14 @@ class SexualityScreenState extends State<SexualityScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Prefer not to say",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     color: Colors.white, fontSize: 18),
                                 overflow: TextOverflow.ellipsis,
                               ),

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_holo_date_picker/flutter_holo_date_picker.dart';
 import 'package:provider/provider.dart';
-import '../../../common/loader.dart';
-import '../../../common/toast.dart';
+import '../../../common/loader.dart'; 
 import '../../../config/routes/route_name.dart';
 
 class DOBScreen extends StatefulWidget {
@@ -21,7 +20,7 @@ class _DOBScreenState extends State<DOBScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
@@ -39,8 +38,8 @@ class _DOBScreenState extends State<DOBScreen> {
             ),
             SizedBox(
               height: height * 0.10,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30),
+              child: const Padding(
+                padding: EdgeInsets.only(left: 30),
                 child: Text(
                   "Date Of Birth",
                   style: TextStyle(

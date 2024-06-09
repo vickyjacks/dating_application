@@ -29,7 +29,7 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
       relationship = "divorce";
     }
     final height = MediaQuery.of(context).size.height;
-    final width= MediaQuery.of(context).size.width;
+    // final width= MediaQuery.of(context).size.width;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.black,
@@ -43,9 +43,9 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15,),
+              padding: EdgeInsets.only(left: 15,),
               child: Text(
                 "Relationship Status",
                 style:TextStyle(color: Colors.white,
@@ -76,11 +76,11 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Single",
                                 style:TextStyle(
@@ -115,12 +115,12 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width - 66,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Married",
                                 style: TextStyle(
@@ -159,12 +159,12 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Widowed",
                                 style: TextStyle(
@@ -200,12 +200,12 @@ class _RelationshipScreenState extends State<RelationshipScreen> {
                       label: SizedBox(
                         width: MediaQuery.of(context).size.width,
                         height: 35,
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment:
                           MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 10),
+                              padding: EdgeInsets.only(left: 10),
                               child: Text(
                                 "Divorced",
                                 style:  TextStyle(

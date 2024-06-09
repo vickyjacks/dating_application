@@ -70,6 +70,9 @@ bool get buySubscriptionLoading => _buySubscriptionLoading;
         "merchantTransactionId": ""};
 
       final response = await apiObj.postData(ApiConstants.buySubscription, data);
+      if(response["status"]==true){
+        
+      }
     }on Exception catch(e){
       _buySubscriptionLoading = false;
       notifyListeners();

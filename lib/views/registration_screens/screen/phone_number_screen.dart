@@ -1,4 +1,3 @@
-import 'package:datingapp/common/button.dart';
 import 'package:datingapp/common/toast.dart';
 import 'package:datingapp/config/routes/route_name.dart';
 import 'package:datingapp/views/registration_screens/provider/auth_provider.dart';
@@ -66,10 +65,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                         border: Border.all(color: Colors.grey.shade600),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Center(
+                      child: const Center(
                           child: Text(
                             '+91',
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,
                               fontFamily: 'Outfit',

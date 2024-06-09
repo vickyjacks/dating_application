@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -89,7 +88,7 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
@@ -97,7 +96,7 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                       width: 170,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.red),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
@@ -108,7 +107,7 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                           color: Colors.red
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
@@ -119,7 +118,7 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                           color: Colors.red
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Row(
@@ -151,7 +150,7 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
@@ -159,7 +158,7 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                       width: 170,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.red),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
@@ -247,10 +246,10 @@ class SubscriptionPlansScreenState extends State<SubscriptionPlansScreen> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (selectedContainerIndex == index)...[ Row(
+                                    if (selectedContainerIndex == index)...[ const Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
-                                       const Padding(
+                                       Padding(
                                             padding: EdgeInsets.only(right: 8.0, top: 8.0),
                                             child: Icon(Icons.check, size: 25, color: Colors.red),
                                           ),

@@ -22,7 +22,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Consumer<CMSProvider>(builder: (context,provider,child){
       return provider.helpCenterLoading ?   Scaffold(
@@ -52,7 +52,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                     width: width,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -103,8 +103,8 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, top: 0),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, top: 0),
                 child: Text("Help Center",
                     style:   TextStyle(
                       fontSize: 22,
@@ -136,7 +136,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                             'assets/png_img/IT-Support.png',
                             height: 200,
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -153,7 +153,7 @@ class _HelpCenterScreenState extends State<HelpCenterScreen> {
                               color: Colors.deepOrange,
                             ),
                             Text("  ${provider.fetchHelpCenterModel.data[index].phone}",
-                                style:  TextStyle(
+                                style:  const TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.w400,

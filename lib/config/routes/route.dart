@@ -1,4 +1,5 @@
 import 'package:datingapp/config/routes/route_name.dart';
+import 'package:datingapp/views/hitmeup/screen/hitmeup_create_screen.dart';
 import 'package:datingapp/views/registration_screens/screen/dob_screen.dart';
 import 'package:datingapp/views/splash/app_launcher.dart';
 import 'package:datingapp/views/splash/first_splash_screen.dart';
@@ -56,9 +57,7 @@ class Routes {
       case RoutesName.genderScreen:
         return MaterialPageRoute(builder: (context) => const GenderScreen());
       case RoutesName.interestedInScreen:
-        return MaterialPageRoute(builder: (context) => const InterestedInScreen());
-      case RoutesName.genderScreen:
-        return MaterialPageRoute(builder: (context) => const GenderScreen());
+        return MaterialPageRoute(builder: (context) => const InterestedInScreen()); 
       case RoutesName.sexualityScreen:
         return MaterialPageRoute(builder: (context) => const SexualityScreen());
       case RoutesName.relationshipScreen:
@@ -110,6 +109,8 @@ class Routes {
         return MaterialPageRoute(builder: (context) => const PrivacyPolicyScreen());
        case RoutesName.hitMeUpRequestScreen:
         return MaterialPageRoute(builder: (context) => const HitMeUpRequestScreen());
+         case RoutesName.createHitMeUpScreen:
+        return MaterialPageRoute(builder: (context) =>  const CreateHitMeUpScreen());
       default:
         return MaterialPageRoute(builder: (context) {
           return const Scaffold(

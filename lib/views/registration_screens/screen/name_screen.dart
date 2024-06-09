@@ -13,7 +13,7 @@ class NameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
       resizeToAvoidBottomInset: false,
@@ -28,18 +28,18 @@ class NameScreen extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 15,),
+              const Padding(
+                padding: EdgeInsets.only(left: 15,),
                 child: Text(
                     "What's your name?",
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.w400)
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15, right:15),
+              const Padding(
+                padding: EdgeInsets.only(left: 15, right:15),
                 child: Text(
                     "This is how it'll appear on your profile .",
                     style:TextStyle(
@@ -49,8 +49,8 @@ class NameScreen extends StatelessWidget {
                         fontWeight: FontWeight.w400)
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 15,),
+              const Padding(
+                padding: EdgeInsets.only(left: 15,),
                 child: Text(
                     "Can't change it later .",
                     style: TextStyle(
@@ -82,7 +82,7 @@ class NameScreen extends StatelessWidget {
                           const TextStyle(height: 1, color: Colors.red),
                           focusedErrorBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.red,
                               )),
                           enabledBorder: OutlineInputBorder(

@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
 
-          body: Center(
+          body: const Center(
             child: Text("Hello Home",style: TextStyle(color: Colors.white),),
           ),
         );

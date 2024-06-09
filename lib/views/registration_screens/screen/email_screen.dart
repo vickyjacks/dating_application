@@ -61,10 +61,10 @@ class EmailScreen extends StatelessWidget {
                   ),
                   child: TextFormField(
                     controller: provider.emailController,
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      label: Text("Enter email"),
+                      label: const Text("Enter email"),
                       labelStyle: const TextStyle(color: Colors.white),
                       border: OutlineInputBorder(
                         borderSide: const BorderSide(width: 0.30, color: Colors.white),
@@ -72,7 +72,7 @@ class EmailScreen extends StatelessWidget {
                       ),
                       focusedErrorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.red,
                         ),
                       ),

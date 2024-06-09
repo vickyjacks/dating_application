@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'package:datingapp/common/toast.dart';
-import 'package:datingapp/views/registration_screens/provider/auth_provider.dart';
+import 'package:datingapp/common/toast.dart';  
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
+import 'package:image_picker/image_picker.dart'; 
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +19,6 @@ class PhotosScreen extends StatefulWidget {
 }
 
 class _PhotosScreenState extends State<PhotosScreen> {
-  bool _isLoaderVisible = false;
   final List<String> _selectedImages = [];
   final _picker = ImagePicker();
   String firstImage = '';
@@ -30,11 +27,11 @@ class _PhotosScreenState extends State<PhotosScreen> {
   String fourthImage = '';
   String fifthImage = '';
   String sixthImage = '';
-  List<Map<dynamic, dynamic>> _allImages = [];
+  final List<Map<dynamic, dynamic>> _allImages = [];
 
   void _removeImage(index,image) {
     setState(() {
-      _selectedImages!.removeWhere((element) => element==image);
+      _selectedImages.removeWhere((element) => element==image);
       if (index == 0) {
         firstImage = "";
       }
@@ -104,7 +101,7 @@ class _PhotosScreenState extends State<PhotosScreen> {
         if (kDebugMode) {
           print('Images uploaded successfully');
         }
-        Navigator.pushReplacementNamed(context, RoutesName.faceDetectionScreen);
+         if(context.mounted) Navigator.pushReplacementNamed(context, RoutesName.faceDetectionScreen);
         // materialPageRoute(context, const FaceDetectionScreen());
          } else {
         setState(() {
@@ -134,8 +131,8 @@ class _PhotosScreenState extends State<PhotosScreen> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 15,bottom: 15),
+            const Padding(
+              padding: EdgeInsets.only(left: 15,bottom: 15),
               child: Text(
                 "Pick Your Photos",
                 style: TextStyle(color: Colors.white,
@@ -696,8 +693,8 @@ class _PhotosScreenState extends State<PhotosScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 15),
+                const Padding(
+                  padding: EdgeInsets.only(left: 20, top: 15),
                   child: Text(
                     "Atleast 3 photos are required",
                     textAlign: TextAlign.left ,

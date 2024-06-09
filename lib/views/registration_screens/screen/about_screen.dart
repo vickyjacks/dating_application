@@ -25,8 +25,8 @@ class AboutScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15,),
+          const Padding(
+            padding: EdgeInsets.only(left: 15,),
             child: Text(
               "About you!",
               style: TextStyle(
@@ -35,8 +35,8 @@ class AboutScreen extends StatelessWidget {
                   fontWeight: FontWeight.w400)
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 15, right: 15),
+          const Padding(
+            padding: EdgeInsets.only(left: 15, right: 15),
             child: Text(
               "Please write the about you",
               style: TextStyle(

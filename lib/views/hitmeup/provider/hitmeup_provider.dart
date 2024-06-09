@@ -2,7 +2,9 @@
 import 'package:datingapp/services/api_service.dart';
 import 'package:datingapp/views/hitmeup/model/fetch_hitmeup_explore_list_model.dart';
 import 'package:datingapp/views/hitmeup/model/fetch_hitmeup_upcoming_list_model.dart';
+import 'package:datingapp/views/location/provider/location_provider.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../const/end_point.dart';
@@ -302,8 +304,46 @@ class HitMeUpProvider with ChangeNotifier{
     hitMeUpCategoryId = categoryId;
     notifyListeners(); 
   }
+/// create hit me up api 
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController detailsController = TextEditingController();
+
+  bool _createHitMeUpLoading= false;
+  bool get createHitMeUpLoading => _createHitMeUpLoading;
+  set createHitMeUpLoading(bool value) {
+    _createHitMeUpLoading = value;
+    notifyListeners();
+  }
+
+  Future createHitMeUpApi(String date,String time,String locationRange,loctionDetail) async {
+    _createHitMeUpLoading = true;
+    notifyListeners();
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? userId = pref.getString('userId');
+        final data = {
+          "user_id": userId,
+           "category_id": hitMeUpCategoryId, 
+           "title": titleController.text, 
+           "date": date,
+          "time": time,
+             "location": loctionDetail,
+              "location_range": locationRange,
+               "details": detailsController.text
+               };
+    
+      final response = await apiObj.postData(ApiConstants.createNewHitMeUp, data);
+      _createHitMeUpLoading = false;
+      notifyListeners();
+      return response;
+    } on Exception catch (e) {
+      _createHitMeUpLoading = false;
+      notifyListeners();
+      throw Exception(e.toString());
+    }
+  }
+
+
 
 }

@@ -38,8 +38,7 @@ class _PassionScreenState extends State<PassionScreen> {
 
   List searchUpcomingList = [];
   @override
-  void initState() {
-    // TODO: implement initState
+  void initState() { 
     searchUpcomingList = interestModelList;
     super.initState();
   }
@@ -78,9 +77,9 @@ class _PassionScreenState extends State<PassionScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, bottom: 20),
+              padding: EdgeInsets.only(left: 15, bottom: 20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +90,7 @@ class _PassionScreenState extends State<PassionScreen> {
                   ),
                   Text(
                     "Select a few of your interests and let everyone know what you’re passionate about.",
-                    style: const TextStyle(color: Colors.white, fontSize: 15),
+                    style: TextStyle(color: Colors.white, fontSize: 15),
                     textAlign: TextAlign.start,
                   ),
                 ],
@@ -158,7 +157,7 @@ class _PassionScreenState extends State<PassionScreen> {
                       onSelected: (bool selected) {
                         selectChip(searchUpcomingList[index].titles);
                       },
-                      selectedColor: Color(0xffE94057),
+                      selectedColor: const Color(0xffE94057),
                     ),
                   );
                 },

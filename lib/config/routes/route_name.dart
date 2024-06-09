@@ -34,5 +34,6 @@ class RoutesName{
   static const String termsConditionScreen ="termsConditionScreen";
   static const String privacyPolicyScreen ="privacyPolicyScreen";
   static const String hitMeUpRequestScreen ="hitMeUpRequestScreen";
+    static const String createHitMeUpScreen ="createHitMeUpScreen";
 
 }

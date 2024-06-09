@@ -18,7 +18,7 @@ class _DistanceRangeScreenState extends State<DistanceRangeScreen> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.black,
@@ -67,20 +67,20 @@ class _DistanceRangeScreenState extends State<DistanceRangeScreen> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, top: 30),
+                    padding: EdgeInsets.only(left: 15, top: 30),
                     child: Text("Your Distance \nPreference?", style: TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.w500)),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 10,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    padding: EdgeInsets.only(left: 15, right: 15),
                     child: Text("Use the slider to set the maximum distance you would like potential matched to be located.", style: TextStyle(color: Colors.white70, fontSize: 16, fontWeight: FontWeight.w400)),
                   ),
                 ],
@@ -186,7 +186,7 @@ class _DistanceRangeScreenState extends State<DistanceRangeScreen> {
                   onTap: () async {
                     final response = await provider.distanceRangePostApi(distance);
                     if (response['status'] == true) {
-                     Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
+                     if(context.mounted) Navigator.pushReplacementNamed(context, RoutesName.mainScreen);
                     } else {
                       CommonToast.toastErrorMessage(response['message']);
                     }

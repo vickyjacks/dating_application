@@ -66,11 +66,11 @@ class _MyHitMeUpDialogState extends State<MyHitMeUpDialog> {
                                 children: [
                                   Text(
                                     provider.fetchMyHitMeUpDetailModel.data!.userName,
-                                    style: TextStyle(color: Colors.black, fontSize: 20),
+                                    style: const TextStyle(color: Colors.black, fontSize: 20),
                                   ),
                                   Text(
                                     provider.fetchMyHitMeUpDetailModel.data!.createDate,
-                                    style: TextStyle(color: Colors.black, fontSize: 12),
+                                    style: const TextStyle(color: Colors.black, fontSize: 12),
                                   ),
                                 ],
                               ),
@@ -122,7 +122,7 @@ class _MyHitMeUpDialogState extends State<MyHitMeUpDialog> {
                                 Expanded(
                                   child: Text(
                                     provider.fetchMyHitMeUpDetailModel.data!.location,
-                                    style: TextStyle(color: Colors.black, fontSize: 13),
+                                    style: const TextStyle(color: Colors.black, fontSize: 13),
                                   ),
                                 ),
                               ],
@@ -142,7 +142,7 @@ class _MyHitMeUpDialogState extends State<MyHitMeUpDialog> {
                                 ),
                                 Text(
                                   provider.fetchMyHitMeUpDetailModel.data!.date,
-                                  style: TextStyle(color: Colors.black, fontSize: 13),
+                                  style: const TextStyle(color: Colors.black, fontSize: 13),
                                 ),
                                 const Spacer(),
                                 const Icon(
@@ -245,8 +245,8 @@ class _MyHitMeUpDialogState extends State<MyHitMeUpDialog> {
 
                                                     if (response["status"] == true) {
                                                       CommonToast.toastSuccessMessage(response["message"]);
-                                                      await Provider.of<HitMeUpProvider>(context, listen: false).fetchMyHitMeUpDetailApi();
-                                                      Navigator.of(context).pop();
+                                                      if(context.mounted) await Provider.of<HitMeUpProvider>(context, listen: false).fetchMyHitMeUpDetailApi();
+                                                       if(context.mounted) Navigator.of(context).pop();
                                                     }
                                                   },
                                                   child: Container(

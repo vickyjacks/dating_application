@@ -28,8 +28,7 @@ class AuthProvider with ChangeNotifier {
 
   /// set session code
   int? sessionStatusCode;
-  setSessionStatusCode(int code) {
-    print("code :: $code");
+  setSessionStatusCode(int code) { 
     sessionStatusCode = code;
     notifyListeners();
   }
@@ -52,8 +51,7 @@ class AuthProvider with ChangeNotifier {
         'mobile': phoneController.text,
         'user_fcm_token': deviceToken,
       };
-      var response = await apiObj.postData(ApiConstants.sendOtp, postData);
-      print("+++++++++line 38 ${response}");
+      var response = await apiObj.postData(ApiConstants.sendOtp, postData); 
       _loginLoading = false;
       notifyListeners();
       return response;
@@ -353,7 +351,6 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
     try {
       final response = await apiObj.uploadImageAndPostApi(apiUrl: ApiConstants.faceVerification, documentDetails: image);
-      print("++++++++++383 $response");
       _faceVerificationLoading = false;
       notifyListeners();
       return response;
