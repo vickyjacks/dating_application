@@ -89,16 +89,16 @@ class ProfileProvider with ChangeNotifier{
     notifyListeners();
   }
 
-  FetchReciverUserProfileDetailsModel _userProfileDetailsModel =
+  FetchReciverUserProfileDetailsModel _fetchReciverUserProfileDetailsModel =
       FetchReciverUserProfileDetailsModel();
-  FetchReciverUserProfileDetailsModel get userProfileDetailsModel =>
-      _userProfileDetailsModel;
-  set userProfileDetailsModel(FetchReciverUserProfileDetailsModel value) {
-    _userProfileDetailsModel = value;
+  FetchReciverUserProfileDetailsModel get fetchReciverUserProfileDetailsModel =>
+      _fetchReciverUserProfileDetailsModel;
+  set fetchReciverUserProfileDetailsModel(FetchReciverUserProfileDetailsModel value) {
+    _fetchReciverUserProfileDetailsModel = value;
     notifyListeners();
   }
 
-  Future fetchUserProfileDetailApi() async {
+  Future fetchRecieverUserProfileDetailApi() async {
     _fetchUserProfileDetailLoading = true;
     notifyListeners();
     try {
@@ -107,7 +107,7 @@ class ProfileProvider with ChangeNotifier{
       final data = {"user_id": userId};
       final response =
           await apiObj.postData(ApiConstants.fetchUserProfile, data);
-      _userProfileDetailsModel =
+      _fetchReciverUserProfileDetailsModel =
           FetchReciverUserProfileDetailsModel.fromMap(response);
       _fetchUserProfileDetailLoading = false;
       notifyListeners();

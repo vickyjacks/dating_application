@@ -38,4 +38,5 @@ class ApiConstants {
   static const deleteHitMeUpUpcoming = 'upcoming-request-delete';
   static const sendExploreRequestHitMeUp = 'send-explore-request';
   static const createNewHitMeUp = 'add-hitmeup';
+    static const fetchUserProfile = 'view-user-hitmeup';
 }
