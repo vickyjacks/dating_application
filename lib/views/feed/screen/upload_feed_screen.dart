@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:datingapp/config/routes/route_name.dart';
 import 'package:datingapp/views/feed/provider/feed_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -215,7 +214,7 @@ class _UploadFeedScreenState extends State<UploadFeedScreen> {
                         final response = await provider.uploadFeedApi("");
                         if (response["status"] == true) {
                           CommonToast.toastSuccessMessage(response["message"]);
-                          Navigator.of(context).pop();
+                         if(context.mounted) Navigator.of(context).pop();
                           // if (context.mounted) Navigator.(context, RoutesName.showFeedScreen);
                         } else {
                           CommonToast.toastErrorMessage(response["message"]);
@@ -224,7 +223,7 @@ class _UploadFeedScreenState extends State<UploadFeedScreen> {
                         final response = await provider.uploadFeedApi(galleryFile!.path);
                         if (response["status"] == true) {
                           CommonToast.toastSuccessMessage(response["message"]);
-                          Navigator.of(context).pop();
+                         if(context.mounted) Navigator.of(context).pop();
                           // if (context.mounted) Navigator.pushReplacementNamed(context, RoutesName.showFeedScreen);
                         } else {
                           CommonToast.toastErrorMessage(response["message"]);

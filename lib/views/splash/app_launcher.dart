@@ -66,7 +66,6 @@ class _AppLauncherState extends State<AppLauncher> {
           );
         } else {
           int code = Provider.of<AuthProvider>(context, listen: false).sessionStatusCode ?? 200;
-          print("code :: $code");
           Widget targetScreen = Container();
           if (code == 201) {
             targetScreen = const SecondSplashScreen();

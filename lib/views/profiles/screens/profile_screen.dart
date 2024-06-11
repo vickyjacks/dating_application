@@ -1,5 +1,4 @@
-import 'package:datingapp/config/routes/route_name.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:datingapp/config/routes/route_name.dart'; 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_svg/svg.dart';
@@ -80,7 +79,7 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                         width: 150,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Container(
@@ -285,7 +284,7 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 20, top: 18, right: 20),
+                    padding: const EdgeInsets.only(left: 20, top: 18, right: 20),
                     child: Row(
                       children: [
                         Container(
@@ -300,7 +299,7 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                               borderRadius: BorderRadius.circular(40)),
                         ),
                         const SizedBox(width: 8,),
-                        Text(
+                        const Text(
                           "About Me",
                           style:   TextStyle(fontFamily: "Outfit",color: Colors.white, fontSize: 20),
                         ),
@@ -335,7 +334,7 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                         ),
                       )),
                   Padding(
-                    padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+                    padding: const EdgeInsets.only(left: 20, right: 20, top: 5),
                     child: Row(
                       children: [
                         Container(
@@ -349,8 +348,8 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                               ]),
                               borderRadius: BorderRadius.circular(40)),
                         ),
-                        SizedBox(width: 8,),
-                        Text(
+                        const SizedBox(width: 8,),
+                        const Text(
                           "Interests",
                           style:  TextStyle(color: Colors.white, fontSize: 20),
                         ),
@@ -444,12 +443,12 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                               ]),
                               borderRadius: BorderRadius.circular(40)),
                         ),
-                        SizedBox(width: 8,),
-                        Text(
+                        const SizedBox(width: 8,),
+                        const Text(
                           "Picture",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Padding(
                           padding: const EdgeInsets.only(right: 20),
                           child: InkWell(
@@ -469,7 +468,7 @@ class ProfileHomeScreenState extends State<ProfileHomeScreen> {
                     padding: const EdgeInsets.only(left: 15, right: 15, bottom: 40),
                     child: GridView.builder(
                       physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, // Number of columns
                         crossAxisSpacing: 10, // Spacing between columns
                         mainAxisSpacing: 10, // Spacing between rows

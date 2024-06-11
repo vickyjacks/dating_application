@@ -1,12 +1,9 @@
 import 'package:datingapp/views/matchings/provider/matching_provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shimmer/shimmer.dart';
-
-import '../../../const/color.dart';
+import 'package:shimmer/shimmer.dart'; 
 
 class MatchesScreen extends StatefulWidget {
   const MatchesScreen({super.key});
@@ -263,8 +260,8 @@ class LikesPageState extends State<MatchesScreen> {
                                   InkWell(
                                     borderRadius: BorderRadius.circular(50),
                                     onTap: () async {
-                                      SharedPreferences pref = await SharedPreferences.getInstance();
-                                      String? userId = pref.getString('userId');
+                                      // SharedPreferences pref = await SharedPreferences.getInstance();
+                                      // String? userId = pref.getString('userId');
                                       // materialPageRoute(context, UserChatConversionScreen(
                                       //   userId: userId,
                                       //   receiverId: data.data[index].getUserId.toString(),

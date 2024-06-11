@@ -22,7 +22,7 @@ class _SafetyScreenState extends State<SafetyScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Consumer<CMSProvider>(builder: (context,provider,child){
       return provider.safetyLoading ?   Scaffold(
@@ -52,7 +52,7 @@ class _SafetyScreenState extends State<SafetyScreen> {
                     width: width,
                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
@@ -103,11 +103,11 @@ class _SafetyScreenState extends State<SafetyScreen> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, top: 0),
+                const Padding(
+                  padding: EdgeInsets.only(left: 15, top: 0),
                   child: Text(
                       "Safety",
-                      style:   const TextStyle(
+                      style:   TextStyle(
                         fontSize: 22,
                         color: Colors.white,
                       )
@@ -133,7 +133,7 @@ class _SafetyScreenState extends State<SafetyScreen> {
                     children: [
                       Text(
                         provider.fetchSafetyModel.data[index].title,
-                        style:   TextStyle(
+                        style:   const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                           fontWeight: FontWeight.w400,

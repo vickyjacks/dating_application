@@ -48,8 +48,8 @@ class DatingTypeScreenState extends State<DatingTypeScreen> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 15, top: 0),
+            const Padding(
+              padding: EdgeInsets.only(left: 15, top: 0),
               child: Text(
                   "",
                   style: TextStyle(
@@ -68,9 +68,9 @@ class DatingTypeScreenState extends State<DatingTypeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 30),
+              padding: EdgeInsets.only(left: 15, top: 30),
               child: Row(
                 children: [
                   Text(
@@ -81,8 +81,8 @@ class DatingTypeScreenState extends State<DatingTypeScreen> {
                         fontFamily: 'Outfit',
                         fontWeight: FontWeight.w400)
                   ),
-                  const SizedBox(width: 10,),
-                  const Padding(
+                  SizedBox(width: 10,),
+                  Padding(
                     padding: EdgeInsets.only(top: 8.0),
                     child: Icon(Icons.search_rounded,color: Colors.red,size: 40,),
                   )
@@ -110,13 +110,13 @@ class DatingTypeScreenState extends State<DatingTypeScreen> {
                       ),
                       borderRadius: BorderRadius.circular(15),
                     ),
-                    label: SizedBox(
+                    label: const SizedBox(
                       height: 35,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
                               "Date",
                               style: TextStyle(
@@ -158,11 +158,11 @@ class DatingTypeScreenState extends State<DatingTypeScreen> {
                     label: SizedBox(
                       width: MediaQuery.of(context).size.width,
                       height: 35,
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: EdgeInsets.only(left: 10),
                             child: Text(
                               "BFF",
                               style: TextStyle(

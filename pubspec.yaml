@@ -57,6 +57,7 @@ dependencies:
   location: ^6.0.1
   google_maps_flutter: ^2.5.0
   shimmer: ^3.0.0
+  smooth_page_indicator: ^1.1.0
 
 
 dev_dependencies:

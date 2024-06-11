@@ -1,4 +1,5 @@
 import 'package:datingapp/const/end_point.dart';
+import 'package:datingapp/views/profiles/model/fetch_user_profile_detail_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,8 +34,7 @@ class ProfileProvider with ChangeNotifier{
       final data = {"user_id": userId.toString()};
       final response = await apiObj.postData(ApiConstants.fetchUserProfileData, data);
       _fetchUserProfileDetailsModel = FetchUserProfileDetailsModel.fromMap(response);
-      updateAboutController.text =  _fetchUserProfileDetailsModel.data!.about;
-      print("++++++++>>>>$_fetchUserProfileDetailsModel");
+      updateAboutController.text =  _fetchUserProfileDetailsModel.data!.about; 
       _fetchUserProfileLoading = false;
       notifyListeners();
     }on Exception catch(e){
@@ -79,5 +79,43 @@ class ProfileProvider with ChangeNotifier{
       throw Exception(e.toString());
     }
   }
+
+
+  /// fetch hit me up upcoming api
+  bool _fetchUserProfileDetailLoading = false;
+  bool get fetchUserProfileDetailLoading => _fetchUserProfileDetailLoading;
+  set fetchUserProfileDetailLoading(bool value) {
+    _fetchUserProfileDetailLoading = value;
+    notifyListeners();
+  }
+
+  FetchReciverUserProfileDetailsModel _fetchReciverUserProfileDetailsModel =
+      FetchReciverUserProfileDetailsModel();
+  FetchReciverUserProfileDetailsModel get fetchReciverUserProfileDetailsModel =>
+      _fetchReciverUserProfileDetailsModel;
+  set fetchReciverUserProfileDetailsModel(FetchReciverUserProfileDetailsModel value) {
+    _fetchReciverUserProfileDetailsModel = value;
+    notifyListeners();
+  }
+
+  Future fetchRecieverUserProfileDetailApi() async {
+    _fetchUserProfileDetailLoading = true;
+    notifyListeners();
+    try {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      String? userId = pref.getString('userId');
+      final data = {"user_id": userId};
+      final response =
+          await apiObj.postData(ApiConstants.fetchUserProfile, data);
+      _fetchReciverUserProfileDetailsModel =
+          FetchReciverUserProfileDetailsModel.fromMap(response);
+      _fetchUserProfileDetailLoading = false;
+      notifyListeners();
+    } on Exception catch (e) {
+      _fetchUserProfileDetailLoading = false;
+      notifyListeners();
+      throw Exception(e.toString());
+    }
+  } 
 
 }

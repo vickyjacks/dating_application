@@ -23,7 +23,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+    // double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Consumer<CMSProvider>(builder: (context, provider, child) {
       return provider.fetchPrivacyPolicyLoading
@@ -54,7 +54,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                           width: width,
                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
@@ -135,7 +135,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                         children: [
                           Text(
                             provider.fetchPrivacyPolicyModel.data[index].title,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.w400,

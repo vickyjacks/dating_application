@@ -1,6 +1,6 @@
+import 'package:datingapp/common/loader.dart';
 import 'package:flutter/material.dart';
 
-import 'loader.dart';
 
 // ignore: must_be_immutable
 class CustomButtons extends StatelessWidget {
@@ -103,7 +103,7 @@ class AppBarContentIconwithSkipText extends StatelessWidget {
             ),
             child: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
-              color: Color.fromRGBO(233, 64, 87, 1),
+              color: const Color.fromRGBO(233, 64, 87, 1),
               iconSize: 15,
               onPressed: () => Navigator.pop(context),
             ),
@@ -120,4 +120,55 @@ class AppBarContentIconwithSkipText extends StatelessWidget {
       ),
     );
   }
+}
+
+// ignore: must_be_immutable
+class NewCustomButton extends StatelessWidget {
+  final Function() onPressed;
+  String title;
+  double height;
+  double width;
+  bool isLoading;
+  NewCustomButton(
+      {super.key, required this.onPressed,
+        required this.title,
+        required this.height,
+        required this.width,
+          this.isLoading=false,
+      });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      child: Center(
+                  child: Container( 
+                  
+                width: width,
+                decoration: BoxDecoration(
+                  gradient: const LinearGradient(colors: [
+                    Color.fromRGBO(161, 55, 139, 1),
+                    Color.fromRGBO(218, 74, 64, 1),
+                    Color.fromRGBO(229, 67, 97, 1),
+                  ]),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(30),
+                  onTap: onPressed,
+                  child: Center(
+                    child: isLoading
+                        ? CommonLoader.animLoader()
+                        :   Text(title,
+                            style: TextStyle(
+                              fontFamily: "Outfit",
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            )),
+                  ),
+                ),
+              )),
+    );
+            }
 }

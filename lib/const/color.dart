@@ -23,8 +23,8 @@ class AppColor {
   static const kGrey = Colors.grey;
   static const kPrimary = Color(0xFFFD5C61);
 
-  static const yellow_one = Color(0xFFeec365);
-  static const yellow_two = Color(0xFFde9024);
-  static const primary_one = Color(0xFFfc3973);
-  static const primary_two = Color(0xFFfd5f60);
+  static const yellowOne = Color(0xFFeec365);
+  static const yellowTwo = Color(0xFFde9024);
+  static const primaryOne = Color(0xFFfc3973);
+  static const primaryTwo = Color(0xFFfd5f60);
 }

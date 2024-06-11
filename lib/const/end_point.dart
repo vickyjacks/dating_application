@@ -1,4 +1,3 @@
-
 class ApiConstants {
   static const sendOtp = 'registration';
   static const verifyOtp = 'otpverification';
@@ -35,5 +34,9 @@ class ApiConstants {
   static const hitMeUpRequests = 'hitmeup-requests';
   static const hitMeUpRequestsAcceptOrReject = 'request-accept-reject';
   static const fetchHitMeUpExplore = 'hitmeup-explore';
-    static const fetchHitMeUpUpcoming = 'show-hitmeup-coming';
+  static const fetchHitMeUpUpcoming = 'show-hitmeup-coming';
+  static const deleteHitMeUpUpcoming = 'upcoming-request-delete';
+  static const sendExploreRequestHitMeUp = 'send-explore-request';
+  static const createNewHitMeUp = 'add-hitmeup';
+    static const fetchUserProfile = 'view-user-hitmeup';
 }

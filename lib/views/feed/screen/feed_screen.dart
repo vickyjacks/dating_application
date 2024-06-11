@@ -27,8 +27,8 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
   String imageBaseUrl2 = "https://dostanaa.in/public/gallery/";
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final height = MediaQuery.of(context).size.height;
+    // final width = MediaQuery.of(context).size.width;
     return Consumer<FeedProvider>(
       builder: (context, provider, child) {
         // return (provider.fetchFeedLoading==false)
@@ -52,7 +52,7 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                             width: 240,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -60,7 +60,7 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                             width: 150,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -68,7 +68,7 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                             width: double.infinity,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Container(
@@ -76,7 +76,7 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                             width: 240,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -84,7 +84,7 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                             width: 150,
                             decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.grey),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -157,9 +157,9 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                           Navigator.pushNamed(context, RoutesName.uploadFeedScreen);
                         },
                         // isExtended: true,
-                        child: Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: const Icon(
+                        child: const Padding(
+                          padding: EdgeInsets.all(12.0),
+                          child: Icon(
                             Icons.add_rounded,
                             color: Colors.red,
                             size: 25,
@@ -186,7 +186,7 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                         physics: const BouncingScrollPhysics(),
                         shrinkWrap: true,
                         primary: true,
-                        padding: EdgeInsets.only(top: 10),
+                        padding: const EdgeInsets.only(top: 10),
                         itemCount: provider.fetchFeedDetailModel.data.length,
                         itemBuilder: (context, index) {
                           final String inputDate = provider.fetchFeedDetailModel.data[index].date;
@@ -228,13 +228,13 @@ class _ShowFeedScreenState extends State<ShowFeedScreen> {
                                       children: [
                                         Text(
                                           provider.fetchFeedDetailModel.data[index].name,
-                                          style: TextStyle(color: Colors.white, fontSize: 18),
+                                          style: const TextStyle(color: Colors.white, fontSize: 18),
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.only(right: 8.0),
                                           child: Text(
                                             " $formattedDateTime",
-                                            style: TextStyle(color: Colors.white60, fontSize: 10),
+                                            style: const TextStyle(color: Colors.white60, fontSize: 10),
                                           ),
                                         ),
                                       ],
